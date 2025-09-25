@@ -4,6 +4,9 @@ to add files to Github:
     git commit -m "3. point"
     git push
 
+to update the local repo:
+    git pull
+
 who does what part?
     3. Hugo
     4. Marion

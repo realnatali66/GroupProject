@@ -1,19 +1,26 @@
 import java.io.*;
-import java.time.LocalDate;
 import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.List;
 
 
 public class SocialNetwork {
+    private static final List<Person> people = new ArrayList<>();
 
-    public static void main(String[] args) throws IOException {
-        addPerson("EdnTxu","Edurne","Gorostiza","1991,04,22","female","Donostia",
-                "Donostia","UPV/EHU","Inditex","Titanic;Avengers","G6125154");
+    public List<Person> getPeople() { return people; }
 
-    }
-    //2. point from the project manual
+    // 2. point from the project manual
     public static void addPerson(String idperson, String name, String lastName, String birthdate,
         String gender, String birthplace, String home, String studiedAt,
-        String workplaces, String films, String groupcode) throws IOException {
+        String workplaces, String films, String groupcode)
+            throws IOException {
+
+        if (idperson == null) return;
+        String id = idperson.replaceAll("\\p{C}", "").trim();
+        if (id.isEmpty() || findById(id) != null) return;
+        people.add(new Person(id, name, lastName, birthdate, gender, birthplace, home,
+                studiedAt, workplaces, films, groupcode));
+
         Person newPerson2 = new Person(idperson, name, lastName, birthdate, gender, birthplace,
         home, studiedAt, workplaces, films, groupcode);
         File file = new File("socialNetworkG6125107.txt");
@@ -21,6 +28,38 @@ public class SocialNetwork {
         writer.write(newPerson2.toString());
         System.out.println("Wrote to " + file);
         writer.close();
+    }
+
+    private static Person findById(String idRaw) {
+        String id = idRaw == null ? "" : idRaw.replaceAll("\\p{C}", "").trim();
+        for (Person p : people) if (id.equals(p.idperson)) return p;
+        return null;
+    }
+
+    public void loadPeopleFile(String filePath) throws IOException {
+        try (BufferedReader br = new BufferedReader(new FileReader(filePath))) {
+            String line;
+            while ((line = br.readLine()) != null) {
+                if (line.trim().isEmpty()) continue;
+
+                String[] t = line.split(",", -1);
+                String id = t.length>0 ? t[0].replaceAll("\\p{C}", "").trim() : "";
+                String name = t.length>1 ? t[1].trim() : "";
+                String lastName = t.length>2 ? t[2].trim() : "";
+                String birthdate = t.length>3 ? t[3].trim() : "";
+                String gender = t.length>4 ? t[4].trim() : "";
+                String birthplace = t.length>5 ? t[5].trim() : "";
+                String home = t.length>6 ? t[6].trim() : "";
+                String studiedAt = t.length>7 ? t[7].trim() : "";
+                String workplaces = t.length>8 ? t[8].trim() : "";
+                String films = t.length>9 ? t[9].trim() : "";
+                String groupcode = t.length>10? t[10].trim(): "";
+
+                if (id.isEmpty()) continue;
+                addPerson(id, name, lastName, birthdate, gender, birthplace, home,
+                        studiedAt, workplaces, films, groupcode);
+            }
+        }
     }
 
     public static void addPeopleFromFile(String filePath){
@@ -31,11 +70,81 @@ public class SocialNetwork {
                 String stringint = input2program.nextLine();
 
             }
-            System.out.println(i);
             input2program.close();
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
     }
+
+    // point 5
+    // File format: idA,idB
+    // ignore the pair if either id is not in the network, friendship is mutual
+    public void loadFriendshipsFile(String filePath) throws IOException {
+        // Open the file
+        try (BufferedReader br = new BufferedReader(new FileReader(filePath))) {
+            String line;
+
+            // Counters for reporting and debugging
+            int total = 0, linked = 0, skippedUnknown = 0, skippedMalformed = 0;
+
+            while ((line = br.readLine()) != null) {
+                total++;
+                line = line.trim();
+
+                // Skip empty lines (count as unknown)
+                if (line.isEmpty()) {
+                    skippedUnknown++;
+                    continue;
+                }
+
+                // Split by comma. -1 keeps trailing empty values
+                String [] t = line.split(",", -1);
+
+                // If there are not at least 2 tokens, it’s a malformed line
+                if (t.length < 2) { skippedMalformed++; continue; }
+
+                // Extract the two person IDs
+                String a = t[0].trim();
+                String b = t[1].trim();
+
+                // If either ID is empty, treat as malformed
+                if (a.isEmpty() || b.isEmpty()) { skippedMalformed++; continue; }
+
+                // Look up persons in the network
+                Person pa = findById(a);
+                Person pb = findById(b);
+
+                // If one of the persons does not exist, skip this friendship
+                if (pa == null || pb == null) {
+                    skippedUnknown++;
+                    continue;
+                }
+
+                // reciprocal, no duplicates
+                pa.addFriend(pb);
+                pb.addFriend(pa);
+                linked++;
+            }
+        }
+    }
+    public static void main(String[] args) throws IOException {
+        SocialNetwork sn = new SocialNetwork();
+        sn.addPerson("Michal34","Michal","Smith","","","","","","","","");
+        sn.addPerson("Xabi112","Xabi","Jones","","","","","","","","");
+
+        addPerson("EdnTxu","Edurne","Gorostiza","1991,04,22","female","Donostia",
+                "Donostia","UPV/EHU","Inditex","Titanic;Avengers","G6125154");
+
+        for (Person p : sn.people) {
+            System.out.print(p.idperson + " friends -> ");
+            List<Person> fs = p.getFriends();
+            for (int i = 0; i < fs.size(); i++) {
+                System.out.print(fs.get(i).idperson + (i+1<fs.size()? ", ":""));
+            }
+            System.out.println();
+        }
+
+    }
 }
+
 

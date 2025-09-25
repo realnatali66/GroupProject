@@ -1,4 +1,6 @@
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Person {
     public String idperson;
@@ -13,6 +15,9 @@ public class Person {
     public String films;
     public String groupcode;
 
+    // Friend list
+    private final List<Person> friends = new ArrayList<>();
+
     public Person(String idperson, String name, String lastName, String birthdate, String gender, String birthplace,
                   String home, String studiedAt, String workplaces, String films, String groupcode) {
         this.idperson = idperson;
@@ -26,6 +31,18 @@ public class Person {
         this.workplaces = workplaces;
         this.films = films;
         this.groupcode = groupcode;
+    }
+
+    public List<Person> getFriends() {
+        return friends;
+    }
+
+    // Adds friend if not already present
+    public void addFriend(Person other) {
+        if (other == null || other == this) return;
+        if (!friends.contains(other)) {
+            friends.add(other);
+        }
     }
 
     @Override
