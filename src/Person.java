@@ -4,7 +4,7 @@ public class Person {
     public String idperson;
     public String name;
     public String lastName;
-    public LocalDate birthdate;
+    public String  birthdate;
     public String gender;
     public String birthplace;
     public String home;
@@ -13,7 +13,7 @@ public class Person {
     public String films;
     public String groupcode;
 
-    public Person(String idperson, String name, String lastName, LocalDate birthdate, String gender, String birthplace,
+    public Person(String idperson, String name, String lastName, String birthdate, String gender, String birthplace,
                   String home, String studiedAt, String workplaces, String films, String groupcode) {
         this.idperson = idperson;
         this.name = name;
