@@ -1,0 +1,10 @@
+
+to add files to Github:
+    git add .
+    git commit -m "3. point"
+    git push
+
+who does what part?
+    3. Hugo
+    4. Marion
+    5. Daniela
