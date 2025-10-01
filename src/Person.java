@@ -16,10 +16,11 @@ public class Person {
     public String groupcode;
 
     // Friend list
-    private final List<Person> friends = new ArrayList<>();
+    public List<Person> friends;
 
-    public Person(String idperson, String name, String lastName, String birthdate, String gender, String birthplace,
-                  String home, String studiedAt, String workplaces, String films, String groupcode) {
+    public Person(String idperson, String name, String lastName, String birthdate, String gender,
+                  String birthplace, String home, String studiedAt, String workplaces,
+                  String films, String groupcode, ArrayList<Person> friends) {
         this.idperson = idperson;
         this.name = name;
         this.lastName = lastName;
@@ -31,11 +32,10 @@ public class Person {
         this.workplaces = workplaces;
         this.films = films;
         this.groupcode = groupcode;
+        this.friends = friends;
     }
 
-    public List<Person> getFriends() {
-        return friends;
-    }
+    public List<Person> getFriends() {return friends;}
 
     // Adds friend if not already present
     public void addFriend(Person other) {

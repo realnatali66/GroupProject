@@ -2,7 +2,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 import java.io.*;
-
+    //4. point
     public class NamePrinter {
 
         public static void printNames(String inputFile, String outputFile) {

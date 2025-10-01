@@ -14,7 +14,7 @@ public class SocialNetworkTest {
         System.out.println("people_test.txt @ " + peoplePath.toFile().getAbsolutePath());
 
         // Load people from that file
-        sn.loadPeopleFile(peoplePath.toString());
+        sn.addPeopleFromFile(peoplePath.toString());
         System.out.println("People in memory: " + sn.getPeople().size());
         for (Person p : sn.getPeople()) System.out.println(" - " + p.idperson);
 
