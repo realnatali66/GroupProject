@@ -115,7 +115,7 @@ public class SocialNetwork {
 
         addPerson("Michal34","Michal","Smith","","","","","","","","");
         addPerson("Xabi112","Xabi","Jones","","","","","","","","");
-        addPerson("EdnTxu","Edurne","Gorostiza","1991,04,22","female","Donostia",
+        addPerson("EdnTxu","Edurne","Gorostiza","1991.04.22","female","Donostia",
                 "Donostia","UPV/EHU","Inditex","Titanic;Avengers","G6125154");
 
         for (Person p : sn.people) {

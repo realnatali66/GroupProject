@@ -34,7 +34,7 @@ public class Person {
         this.groupcode = groupcode;
         this.friends = friends;
     }
-
+    //custom methods
     public List<Person> getFriends() {return friends;}
 
     // Adds friend if not already present
@@ -43,6 +43,21 @@ public class Person {
         if (!friends.contains(other)) {
             friends.add(other);
         }
+    }
+
+    //Getters and Setters
+
+
+    public String getBirthplace() {
+        return birthplace;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public String getLastName() {
+        return lastName;
     }
 
     @Override
