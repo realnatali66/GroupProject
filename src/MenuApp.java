@@ -2,6 +2,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.Scanner;
+import java.util.concurrent.TimeUnit;
 
 public class MenuApp {
 
@@ -13,12 +14,14 @@ public class MenuApp {
         this.in = new Scanner(System.in);
     }
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws InterruptedException {
         new MenuApp().run();
     }
 
-    private void run() {
+    private void run() throws InterruptedException {
+        System.out.println("Loading social network...");
         while (true) {
+            TimeUnit.SECONDS.sleep(2);
             printMainMenu();
             int choice = readInt();
 
@@ -43,7 +46,7 @@ public class MenuApp {
 
     private void printMainMenu() {
         System.out.println("==================================");
-        System.out.println("            MY_MENU");
+        System.out.println("            MY MENU");
         System.out.println("==================================");
         System.out.println("1. Load 'people' into the network");
         System.out.println("2. Load 'relationships'");
