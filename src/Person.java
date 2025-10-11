@@ -34,7 +34,7 @@ public class Person {
         this.friends = friends;
     }
     //custom methods
-    public List<Person> getFriends() {return friends;}
+
 
     // Adds friend if not already present
     public void addFriend(Person other) {
@@ -45,20 +45,15 @@ public class Person {
     }
 
     //Getters and Setters
+    public List<Person> getFriends() {return friends;}
 
-
-    public String getBirthplace() {
-        return birthplace;
-    }
+    public String getBirthplace() {return birthplace;}
 
     public String getName() {
         return name;
     }
 
-
-    public String getLastName() {
-        return lastName;
-    }
+    public String getLastName() {return lastName;}
 
     @Override
     public String toString() {

@@ -21,7 +21,7 @@ public class MenuApp {
     private void run() throws InterruptedException {
         System.out.println("Loading social network...");
         while (true) {
-            TimeUnit.SECONDS.sleep(2);
+            TimeUnit.SECONDS.sleep(1);
             printMainMenu();
             int choice = readInt();
 

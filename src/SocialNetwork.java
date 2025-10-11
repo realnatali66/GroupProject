@@ -106,7 +106,8 @@ public class SocialNetwork {
     }
 
 
-    public static void main(String[] args) {
+/*    //not needed unless for testing
+public static void main(String[] args) {
 
         addPerson("Michal34","Michal","Smith","","","","","","","","");
         addPerson("Xabi112","Xabi","Jones","","","","","","","","");
@@ -123,6 +124,7 @@ public class SocialNetwork {
         }
 
     }
+*/
 }
 
 
