@@ -10,22 +10,21 @@ public class SocialNetwork {
 
     // 2. point from the project manual
     public static void addPerson(String idperson, String name, String lastName, String birthdate,
-        String gender, String birthplace, String home, String studiedAt,
-        String workplaces, String films, String groupcode)
-            throws IOException {
+                                 String gender, String birthplace, String home, String studiedAt,
+                                 String workplaces, String films, String groupcode) {
 
         if (idperson == null) return;
-        String id = idperson.replaceAll("\\p{C}", "").trim();
-        if (id.isEmpty() || findById(id) != null) return;
-        Person newPerson = new Person(id, name, lastName, birthdate, gender, birthplace, home,
-                studiedAt, workplaces, films, groupcode, new ArrayList<Person>());
-        people.add(newPerson);
 
-        File file = new File("socialNetworkG6125107.txt");
-        BufferedWriter writer = new BufferedWriter(new FileWriter(file, true));
-        writer.write(newPerson.toString());
-        System.out.println("Wrote to " + file);
-        writer.close();
+        // Clean and validate ID
+        String id = idperson.replaceAll("\\p{C}", "").trim();
+
+        // Identifier is compulsory and must be unique
+        if (id.isEmpty() || findById(id) != null) return;
+
+        // Only adds person to the in-memory list 'people'
+        Person newPerson = new Person(id, name, lastName, birthdate, gender, birthplace, home,
+                studiedAt, workplaces, films, groupcode, new ArrayList<>());
+        people.add(newPerson);
     }
 
     private static Person findById(String idRaw) {
@@ -67,14 +66,11 @@ public class SocialNetwork {
         try (BufferedReader br = new BufferedReader(new FileReader(filePath))) {
             String line;
             // Counters for reporting and debugging
-            int total = 0, linked = 0, skippedUnknown = 0, skippedMalformed = 0;
 
             while ((line = br.readLine()) != null) {
-                total++;
                 line = line.trim();
 
                 if (line.isEmpty()) {
-                    skippedUnknown++;
                     continue;
                 }
 
@@ -82,14 +78,16 @@ public class SocialNetwork {
                 String [] t = line.split(",", -1);
 
                 // If t length is not at least 2, it’s a malformed line
-                if (t.length < 2 || t.length > 2) { skippedMalformed++; continue; }
+                if (t.length != 2) {
+                    continue; }
 
                 // Extract the two person IDs
                 String a = t[0].trim();
                 String b = t[1].trim();
 
                 // If either ID is empty, treat as malformed
-                if (a.isEmpty() || b.isEmpty()) { skippedMalformed++; continue; }
+                if (a.isEmpty() || b.isEmpty()) {
+                    continue; }
 
                 // Look up persons in the network
                 Person pa = findById(a);
@@ -97,28 +95,25 @@ public class SocialNetwork {
 
                 // If one of the persons does not exist, skip this friendship
                 if (pa == null || pb == null) {
-                    skippedUnknown++;
                     continue;
                 }
 
                 // reciprocal, no duplicates
                 pa.addFriend(pb);
                 pb.addFriend(pa);
-                linked++;
             }
         }
     }
 
 
-    public static void main(String[] args) throws IOException {
-        SocialNetwork sn = new SocialNetwork();
+    public static void main(String[] args) {
 
         addPerson("Michal34","Michal","Smith","","","","","","","","");
         addPerson("Xabi112","Xabi","Jones","","","","","","","","");
         addPerson("EdnTxu","Edurne","Gorostiza","1991.04.22","female","Donostia",
                 "Donostia","UPV/EHU","Inditex","Titanic;Avengers","G6125154");
 
-        for (Person p : sn.people) {
+        for (Person p : people) {
             System.out.print(p.idperson + " friends -> ");
             List<Person> fs = p.getFriends();
             for (int i = 0; i < fs.size(); i++) {

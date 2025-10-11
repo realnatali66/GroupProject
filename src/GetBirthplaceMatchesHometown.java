@@ -1,6 +1,5 @@
 import java.io.*;
 import java.util.List;
-import java.util.Scanner;
 
 public class GetBirthplaceMatchesHometown {
     // 9. point
@@ -24,8 +23,6 @@ public class GetBirthplaceMatchesHometown {
 
                 }
             }
-        } catch (FileNotFoundException e) {
-            throw new RuntimeException(e);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }

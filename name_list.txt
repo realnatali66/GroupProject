@@ -1,0 +1,5 @@
+Alice Anderson, id: A
+Bob Brown, id: B
+Cara Clark, id: C
+
+Total number of people: 3
