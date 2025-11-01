@@ -1,6 +1,7 @@
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.util.List;
 import java.util.Scanner;
 import java.util.concurrent.TimeUnit;
 
@@ -165,13 +166,14 @@ public class MenuApp {
 
     private void shortestChain(){
         String person1 = readLine("Enter first person's id: ");
-        String person2 = readLine("Enter second persons's id: ");
-        ShortestChainConnectingPeople.findShortestChain(person1, person2);
+        String person2 = readLine("Enter second person's id: ");
+        List<String> chain = ShortestChainConnectingPeople.findShortestChain(sn.getPeople(), person1, person2);
+        System.out.println("Lengh of chain: " + chain.size() + " The IDs of people in the chain: " + chain);
     }
     private void longestChain(){
         String person1 = readLine("Enter first person's id: ");
-        String person2 = readLine("Enter second persons's id: ");
-        FindLongestConnectionBetween2People.chainFinder(person1, person2);
+        String person2 = readLine("Enter second person's id: ");
+        LongestChainConnectingPeople.chainFinder(person1, person2);
     }
 
 

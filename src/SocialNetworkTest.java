@@ -1,6 +1,4 @@
-import java.nio.file.*;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.ArrayList;
 
 public class SocialNetworkTest {
     public static void main(String[] args) throws Exception {
@@ -58,6 +56,6 @@ public class SocialNetworkTest {
             System.out.println(sn1.getPeople().get(2).idperson + " 's Freinds: " + sn1.getPeople().get(2).getFriendsID());
 
 
-        FindLongestConnectionBetween2People.chainFinder( "And02", "Gonz01");
+        LongestChainConnectingPeople.chainFinder( "And02", "Gojhjnz01");
     }
 }
