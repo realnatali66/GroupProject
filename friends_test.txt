@@ -1,7 +1,8 @@
 A,B
 B,C
-X,C
-A,
- ,B
-B,C
-EdnTxu, A
+C,D
+D,E
+A,C
+E,F
+G,F
+E,G

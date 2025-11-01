@@ -101,7 +101,9 @@ public class MenuApp {
             System.out.println("3. People born between two dates (yyyy.MM.dd)");
             System.out.println("4. Birthplace matches hometown");
             System.out.println("5. Print names to a file (NamePrinter)");
-            System.out.println("6. Back");
+            System.out.println("6. Find the shortest chain between 2 people");
+            System.out.println("7. Find the longest chain between 2 people");
+            System.out.println("8. Back");
             int c = readInt();
 
             try {
@@ -111,7 +113,9 @@ public class MenuApp {
                     case 3 -> bornBetween();
                     case 4 -> birthplaceMatchesHometown();
                     case 5 -> namePrinter();
-                    case 6 -> { return; }
+                    case 6 -> shortestChain();
+                    case 7 -> longestChain();
+                    case 8 -> { return; }
                     default -> System.out.println("Unknown option.");
                 }
             } catch (Exception e) {
@@ -158,6 +162,19 @@ public class MenuApp {
         String outFile = readLine("Enter path for the output file: ");
         NamePrinter.printNames(peopleFile, outFile);
     }
+
+    private void shortestChain(){
+        String person1 = readLine("Enter first person's id: ");
+        String person2 = readLine("Enter second persons's id: ");
+        ShortestChainConnectingPeople.findShortestChain(person1, person2);
+    }
+    private void longestChain(){
+        String person1 = readLine("Enter first person's id: ");
+        String person2 = readLine("Enter second persons's id: ");
+        FindLongestConnectionBetween2People.chainFinder(person1, person2);
+    }
+
+
 
     // --- helpers ---
     private String readLine(String prompt) {

@@ -45,7 +45,12 @@ public class Person {
     }
 
     //Getters and Setters
-    public List<Person> getFriends() {return friends;}
+    public List<String> getFriendsID() {
+        List<String > friendsID = new ArrayList<>();
+        for (Person friend : friends) {
+            friendsID.add(friend.idperson);
+        }
+        return friendsID;}
 
     public String getBirthplace() {return birthplace;}
 
@@ -54,6 +59,21 @@ public class Person {
     }
 
     public String getLastName() {return lastName;}
+
+
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Person)) return false;
+        Person person = (Person) o;
+        return idperson.equals(person.idperson);
+    }
+
+    @Override
+    public int hashCode() {
+        return idperson.hashCode();
+    }
 
     @Override
     public String toString() {

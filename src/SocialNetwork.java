@@ -27,12 +27,14 @@ public class SocialNetwork {
         people.add(newPerson);
     }
 
-    private static Person findById(String idRaw) {
+    public static Person findById(String idRaw) {
         String id = idRaw == null ? "" : idRaw.replaceAll("\\p{C}", "").trim();
         for (Person p : people) if (id.equals(p.idperson)) return p;
         return null;
     }
     //point 3
+
+
     public void addPeopleFromFile(String filePath) throws IOException {
         try (BufferedReader br = new BufferedReader(new FileReader(filePath))) {
             String line;
@@ -106,25 +108,24 @@ public class SocialNetwork {
     }
 
 
-/*    //not needed unless for testing
-public static void main(String[] args) {
+    //not needed unless for testing
+    public static void main(String[] args) {
 
-        addPerson("Michal34","Michal","Smith","","","","","","","","");
-        addPerson("Xabi112","Xabi","Jones","","","","","","","","");
-        addPerson("EdnTxu","Edurne","Gorostiza","1991.04.22","female","Donostia",
-                "Donostia","UPV/EHU","Inditex","Titanic;Avengers","G6125154");
+        addPerson("Michal34", "Michal", "Smith", "", "", "", "", "", "", "", "");
+        addPerson("Xabi112", "Xabi", "Jones", "", "", "", "", "", "", "", "");
+        addPerson("EdnTxu", "Edurne", "Gorostiza", "1991.04.22", "female", "Donostia",
+                "Donostia", "UPV/EHU", "Inditex", "Titanic;Avengers", "G6125154");
 
         for (Person p : people) {
             System.out.print(p.idperson + " friends -> ");
-            List<Person> fs = p.getFriends();
+            List<String> fs = p.getFriendsID();
             for (int i = 0; i < fs.size(); i++) {
-                System.out.print(fs.get(i).idperson + (i+1<fs.size()? ", ":""));
+                System.out.print(fs + (i + 1 < fs.size() ? ", " : ""));
             }
             System.out.println();
         }
 
     }
-*/
 }
 
 

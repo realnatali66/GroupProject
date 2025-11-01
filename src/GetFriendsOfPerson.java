@@ -8,7 +8,7 @@ public class GetFriendsOfPerson {
         for (Person person : people) {
             if (Objects.equals(person.lastName, lastName)) {
 
-                List<Person> friends = person.getFriends();
+                List<String> friends = person.getFriendsID();
 
                 System.out.println("Person: " + person.lastName + ", ID: " + person.idperson);
 
@@ -21,7 +21,7 @@ public class GetFriendsOfPerson {
 
                 // print only the required ID and Surname for each friend
                 for (int i = 0; i < friends.size(); i++) {
-                    Person f = friends.get(i);
+                    Person f = SocialNetwork.findById(friends.get(i));
                     System.out.print(f.lastName + " (ID: " + f.idperson + ")");
                     if (i < friends.size() - 1) {
                         System.out.print("; ");
