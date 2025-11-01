@@ -1,0 +1,20 @@
+
+to add files to Github:
+    git add .
+    git commit -m "3. point"
+    git push
+
+to update the local repo:
+    git pull
+    git fetch origin
+    git reset --hard origin/main
+
+who does what part?
+    3. Hugo
+    4. Marion
+    5. Daniela
+
+
+
+    questsions for Teacher:
+
