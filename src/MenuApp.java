@@ -104,7 +104,8 @@ public class MenuApp {
             System.out.println("5. Print names to a file (NamePrinter)");
             System.out.println("6. Find the shortest chain between 2 people");
             System.out.println("7. Find the longest chain between 2 people");
-            System.out.println("8. Back");
+            System.out.println("8. Find cliques (size ≥ 5)");
+            System.out.println("9. Back");
             int c = readInt();
 
             try {
@@ -116,7 +117,12 @@ public class MenuApp {
                     case 5 -> namePrinter();
                     case 6 -> shortestChain();
                     case 7 -> longestChain();
-                    case 8 -> { return; }
+                    case 8 -> {
+                        List<List<Person>> cliques = SimpleCliqueFinder.findCliquesAtLeast(sn.getPeople(), 5);
+                        SimpleCliqueFinder.printCliques(cliques);
+                        System.out.println("Total cliques (>=5): " + cliques.size());
+                    }
+                    case 9 -> { return; }
                     default -> System.out.println("Unknown option.");
                 }
             } catch (Exception e) {
