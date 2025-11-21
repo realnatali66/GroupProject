@@ -19,17 +19,17 @@ public class PeopleBornBetween2Dates {
             String birthDate = person.birthdate;
 
             // FIX , added this because it was failing when some people had birtplace empty
-            if (birthDate == null || birthDate.trim().isEmpty()) {
+            if (birthDate == null || birthDate.trim().isEmpty() || birthDate.equals("birthdate")) {
                 continue; // Skip people with no birthdate
             }
 
-            String[] births = birthDate.split("\\.");
+            String[] births = birthDate.split("-");
             if (births.length < 1 || births[0].trim().isEmpty()) {
                 continue; // Skip if date is malformed or just dots
             }
 
             try {
-                int BirthYear = Integer.parseInt(births[0].trim());
+                int BirthYear = Integer.parseInt(births[2].trim());
 
                 if (BirthYear >= StartYear && BirthYear <= EndYear) {
                     peopleBornBetweenDates.add(person);
