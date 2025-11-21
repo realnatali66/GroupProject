@@ -104,8 +104,9 @@ public class MenuApp {
             System.out.println("5. Print names to a file (NamePrinter)");
             System.out.println("6. Find the shortest chain between 2 people");
             System.out.println("7. Find the longest chain between 2 people");
-            System.out.println("8. Find cliques (size ≥ 5)");
-            System.out.println("9. Back");
+            System.out.println("8. Group people by favorite movies");
+            System.out.println("9. Find cliques (size ≥ 5)");
+            System.out.println("10. Back");
             int c = readInt();
 
             try {
@@ -117,12 +118,13 @@ public class MenuApp {
                     case 5 -> namePrinter();
                     case 6 -> shortestChain();
                     case 7 -> longestChain();
-                    case 8 -> {
+                    case 8 -> groupsWithSameProfile();
+                    case 9 -> {
                         List<List<Person>> cliques = SimpleCliqueFinder.findCliquesAtLeast(sn.getPeople(), 5);
                         SimpleCliqueFinder.printCliques(cliques);
                         System.out.println("Total cliques (>=5): " + cliques.size());
                     }
-                    case 9 -> { return; }
+                    case 10 -> { return; }
                     default -> System.out.println("Unknown option.");
                 }
             } catch (Exception e) {
@@ -174,12 +176,15 @@ public class MenuApp {
         String person1 = readLine("Enter first person's id: ");
         String person2 = readLine("Enter second person's id: ");
         List<String> chain = ShortestChainConnectingPeople.findShortestChain(sn.getPeople(), person1, person2);
-        System.out.println("Lengh of chain: " + chain.size() + " The IDs of people in the chain: " + chain);
+        if (chain.size() != 0) System.out.println("Lengh of chain: " + chain.size() + " The IDs of people in the chain: " + chain);
     }
     private void longestChain(){
         String person1 = readLine("Enter first person's id: ");
         String person2 = readLine("Enter second person's id: ");
         LongestChainConnectingPeople.chainFinder(person1, person2);
+    }
+    private void groupsWithSameProfile(){
+        GroupsWithSameProfile.printGroups(sn.getPeople());
     }
 
 
